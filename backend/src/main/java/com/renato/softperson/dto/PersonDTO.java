@@ -12,7 +12,9 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.renato.softperson.entities.Person;
+import com.renato.softperson.services.validation.PersonInsertValid;
 
+@PersonInsertValid
 public class PersonDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -24,11 +26,10 @@ public class PersonDTO implements Serializable{
 	
 	private String gender;
 	
-	@Email(message = "digite um email valido")
-	@Column (unique = true)
+	@Email(message = "digite um email válido")
+	@Column(unique = true)
 	private String email;
-	
-	@NotBlank(message = "Preenchimento Obrigatório")
+
 	@PastOrPresent(message = "A data não pode ser do futuro")
 	private Instant birthDate;
 	
