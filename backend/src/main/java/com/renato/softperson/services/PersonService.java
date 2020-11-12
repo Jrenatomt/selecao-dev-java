@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.renato.softperson.dto.PersonDTO;
+import com.renato.softperson.dto.PersonInsertDTO;
+import com.renato.softperson.dto.PersonUpdateDTO;
 import com.renato.softperson.entities.Person;
 import com.renato.softperson.repositories.PersonRepository;
 import com.renato.softperson.services.exception.ResourceNotFoundException;
@@ -36,7 +38,7 @@ public class PersonService {
 	}
 	
 	@Transactional
-	public PersonDTO insert(PersonDTO dto) {
+	public PersonDTO insert(PersonInsertDTO dto) {
 		Person entity = new Person();
 		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
@@ -44,7 +46,7 @@ public class PersonService {
 	}
 
 	@Transactional
-	public PersonDTO update(Long id, PersonDTO dto) {
+	public PersonDTO update(Long id, PersonUpdateDTO dto) {
 		try {
 			 Person entity = repository.getOne(id);
 			 copyDtoToEntity(dto, entity);

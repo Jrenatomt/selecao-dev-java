@@ -7,5 +7,6 @@ import com.renato.softperson.entities.Person;
 public interface PersonRepository extends JpaRepository<Person, Long> {
 	
 	Person findByEmail(String email);
+	Person findByCpf(String cpf);
 
 }

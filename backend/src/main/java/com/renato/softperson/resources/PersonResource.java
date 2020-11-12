@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.renato.softperson.dto.PersonDTO;
+import com.renato.softperson.dto.PersonInsertDTO;
+import com.renato.softperson.dto.PersonUpdateDTO;
 import com.renato.softperson.services.PersonService;
 
 @RestController
@@ -49,17 +51,17 @@ public class PersonResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<PersonDTO> insert(@Valid @RequestBody PersonDTO dto) {
-		dto = service.insert(dto);
+	public ResponseEntity<PersonDTO> insert(@Valid @RequestBody PersonInsertDTO dto) {
+		PersonDTO newDto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(dto.getId()).toUri();
-		return ResponseEntity.created(uri).body(dto);
+				.buildAndExpand(newDto.getId()).toUri();
+		return ResponseEntity.created(uri).body(newDto);
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<PersonDTO> update(@PathVariable Long id,@Valid @RequestBody PersonDTO dto){
-		dto = service.update(id, dto);
-		return ResponseEntity.ok().body(dto);
+	public ResponseEntity<PersonDTO> update(@PathVariable Long id,@Valid @RequestBody PersonUpdateDTO dto){
+		PersonDTO newDto = service.update(id, dto);
+		return ResponseEntity.ok().body(newDto);
 	}	
 	
 	@DeleteMapping(value = "/{id}")
