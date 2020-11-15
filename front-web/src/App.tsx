@@ -1,9 +1,12 @@
 import React from 'react';
+import './core/assets/styles/custom.scss';
+import './App.scss';
+import Routes from './Routes';
 
 
 const App = () => {
   return(
-     <h1> hello app</h1>
+     <Routes />
   )
 }
 

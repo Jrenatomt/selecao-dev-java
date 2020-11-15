@@ -1,0 +1,38 @@
+.login-container {
+    margin-top: 100px;
+    border-radius: 20px;
+    width: 550px;
+    background: #FFF;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.auth-card-title {
+    padding-top: 50px;
+    font-size: 48px;
+    line-height: 65px;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: #263238;
+
+}
+
+.login-form {
+    align-items: center;
+}
+
+.form-email {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.btn-logar {
+    width: 200px;
+}
+
+.login-submit {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    padding-bottom: 80px;
+    
+}
