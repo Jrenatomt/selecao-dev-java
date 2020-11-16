@@ -1,8 +1,9 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import Navbar from './core/components/Navbar';
+import Admin from './pages/Admin';
 import Login from './pages/auth/Login';
-import Person from './pages/Person';
+
 
 const Routes = () => (
     <BrowserRouter>
@@ -11,11 +12,10 @@ const Routes = () => (
           <Route path="/" exact>
             <Login />
           </Route>
-          <Route path="/persons" >
-            <Person />
+          <Redirect from="/admin" to="/admin/create" exact/>
+          <Route path="/admin">
+            <Admin />
           </Route>
-         
-
         </Switch>
     </BrowserRouter>
   );

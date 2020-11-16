@@ -10,6 +10,7 @@ import javax.validation.constraints.PastOrPresent;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.renato.softperson.entities.Person;
 
 public class PersonDTO implements Serializable{
@@ -27,6 +28,7 @@ public class PersonDTO implements Serializable{
 	private String email;
 
 	@PastOrPresent(message = "A data não pode ser do futuro")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Instant birthDate;
 	
 	private String city;
