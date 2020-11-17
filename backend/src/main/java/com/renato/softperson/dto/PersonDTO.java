@@ -1,7 +1,7 @@
 package com.renato.softperson.dto;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.util.Date;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -28,8 +28,8 @@ public class PersonDTO implements Serializable{
 	private String email;
 
 	@PastOrPresent(message = "A data não pode ser do futuro")
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	private Instant birthDate;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date birthDate;
 	
 	private String city;
 	private String coutry;
@@ -40,7 +40,7 @@ public class PersonDTO implements Serializable{
 	public PersonDTO() {
 	}
 
-	public PersonDTO(Long id, String name, String gender, String email, Instant birthDate, String city, String coutry, String cpf) {
+	public PersonDTO(Long id, String name, String gender, String email, Date birthDate, String city, String coutry, String cpf) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -95,11 +95,11 @@ public class PersonDTO implements Serializable{
 		this.email = email;
 	}
 
-	public Instant getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Instant birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 

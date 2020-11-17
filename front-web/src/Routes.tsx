@@ -1,23 +1,25 @@
 import React from 'react';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { Router, Redirect, Route, Switch } from 'react-router-dom';
 import Navbar from './core/components/Navbar';
 import Admin from './pages/Admin';
 import Login from './pages/auth/Login';
+import history from './core/utils/history'
+import PrivateRoute from './core/components/Routes/PrivateRoutes';
 
 
 const Routes = () => (
-    <BrowserRouter>
+    <Router history={history}>
        <Navbar />
         <Switch>
           <Route path="/" exact>
             <Login />
           </Route>
           <Redirect from="/admin" to="/admin/create" exact/>
-          <Route path="/admin">
+          <PrivateRoute path="/admin">
             <Admin />
-          </Route>
+          </PrivateRoute>
         </Switch>
-    </BrowserRouter>
+    </Router>
   );
 
 export default Routes;

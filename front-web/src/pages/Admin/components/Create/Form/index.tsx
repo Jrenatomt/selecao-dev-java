@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { MakeRequest } from '../../../../../core/utils/request';
+import React from 'react'
+import { useForm } from 'react-hook-form';
+import { MakePrivateRequest } from '../../../../../core/utils/request';
 import BaseForm from '../../../BaseForm';
 import './styles.scss'
-
 
 type FormState = {
     name: string;
@@ -14,102 +14,107 @@ type FormState = {
     cpf: string;
 }
 
-type FormEvent = React.ChangeEvent<HTMLInputElement | HTMLSelectElement>;
-
 const Form = () => {
+    const { register, handleSubmit, errors } = useForm<FormState>();
 
-    const [formData, setFormData] = useState<FormState>({
-        name: '',
-        gender: '',
-        email: '',
-        birthDate: '',
-        city: '',
-        coutry: '',
-        cpf: '',
-    });
-
-
-    const handleOnChange = (event: FormEvent) => {
-        const name = event.target.name;
-        const value = event.target.value;
-        setFormData(data => ({ ...data, [name]: value }));
-    }
-
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
-        const payload = {
-            ...formData
-        }
-
-        MakeRequest({ url: '/persons', method: 'POST', data: payload })
-        .then(() => {
-            setFormData({ name: '', gender: '', email: '', birthDate: '', city: '',coutry: '', cpf: '', })
-        });
+    const onSubmit = (data: FormState) => {
+        MakePrivateRequest({ url: '/persons', method: 'POST', data })
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <BaseForm title="cadastrar uma Passoa">
                 <div className="row">
                     <div className="col-8">
-                        <input
-                            name="name"
-                            value={formData.name}
-                            type="text"
-                            className="form-control mb-4 mt-4"
-                            onChange={handleOnChange}
-                            placeholder="Nome"
-                        />
-                         <select name="gender" value={formData.gender} className="form-control mb-4" onChange={handleOnChange}>
-                            <option value="1">Feminino</option>
-                            <option value="2">Masculino</option>
-                        </select>
+                        <div className="mb-4 mt-4">
+                            <input
+                                name="name"
+                                ref={register({ required: "Campo obrigatório" })}
+                                type="text"
+                                className="form-control input-base"
+                                placeholder="Nome"
+                            />
+                        
+                        {errors.name && (<div className="invalid-feedback d-block erro-title">
+                            {errors.name.message}
+                        </div>)}
+                        </div>
 
-                        <input
-                            name="email"
-                            value={formData.email}
-                            type="email"
-                            className="form-control mb-4"
-                            onChange={handleOnChange}
-                            placeholder="Email"
-                        />
+                        <div className="mb-4">
+                            <select name="gender"
+                                ref={register}
+                                className="form-control input-base" >
+                                <option value="Feminino">Feminino</option>
+                                <option value="Masculino">Masculino</option>
+                            </select>
+                        </div>
 
+                        <div className="mb-4">
+                            <input
+                                name="email"
+                                ref={register({
+                                    pattern: {
+                                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                        message: "Email inválido"
+                                    }
+                                })}
+                                type="email"
+                                className="form-control input-base"
+                                placeholder="Email"
+                            />
+                        </div>
+
+                        <div className="mb-4">
                         <input
                             name="birthDate"
-                            value={formData.birthDate}
+                            ref={register({ required: "Campo obrigatório" })}
                             type="date"
-                            className="form-control mb-4"
-                            onChange={handleOnChange}
+                            className="form-control input-base"
                             placeholder="Data de Nascimento"
                         />
+                         {errors.birthDate && (<div className="invalid-feedback d-block erro-title">
+                            {errors.birthDate.message}
+                        </div>)}
+                        </div>
 
-                        <input
-                            name="city"
-                            value={formData.city}
-                            type="text"
-                            className="form-control mb-4"
-                            onChange={handleOnChange}
-                            placeholder="Naturalidade"
-                        />
+                        <div className="mb-4">
+                            <input
+                                name="city"
+                                ref={register}
+                                type="text"
+                                className="form-control input-base"
+                                placeholder="Naturalidade"
+                            />
+                        </div>
 
-                        <input
-                            name="coutry"
-                            value={formData.coutry}
-                            type="text"
-                            className="form-control mb-4"
-                            onChange={handleOnChange}
-                            placeholder="Nacionalidade"
-                        />
+                        <div className="mb-4">
+                            <input
+                                name="coutry"
+                                ref={register}
+                                type="text"
+                                className="form-control  input-base"
+                                placeholder="Nacionalidade"
+                            />
+                        </div>
 
-                        <input
-                            name="cpf"
-                            value={formData.cpf}
-                            type="text"
-                            className="form-control mb-4"
-                            onChange={handleOnChange}
-                            placeholder="CPF"
-                        />
+                        <div className="mb-4">
+                            <input
+                                name="cpf"
+                                ref={register({
+                                    required: "Campo obrigatório",
+                                    pattern: {
+                                        value: /^(\d{3}.?\d{3}.?\d{3}-?\d{2})/i,
+                                        message: "CPF inválido"
+                                    }
+                                })}
+                                type="text"
+                                className="form-control input-base"
+                                placeholder="CPF"
+                            />                       
+                        {errors.cpf && (<div className="invalid-feedback d-block erro-title">
+                            {errors.cpf.message}
+                        </div>)}
+                        </div>
                     </div>
 
                 </div>

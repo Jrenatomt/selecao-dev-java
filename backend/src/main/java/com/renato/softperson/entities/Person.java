@@ -2,6 +2,7 @@ package com.renato.softperson.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +24,7 @@ public class Person implements Serializable{
 	private String name;
 	private String gender;
 	private String email;
-	private Instant birthDate;
+	private Date birthDate;
 	private String city;
 	private String coutry;
 	private String cpf;
@@ -37,7 +38,7 @@ public class Person implements Serializable{
 	public Person() {
 	}
 
-	public Person(Long id, String name, String gender, String email, Instant birthDate, String city, String coutry) {
+	public Person(Long id, String name, String gender, String email, Date birthDate, String city, String coutry) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -80,11 +81,11 @@ public class Person implements Serializable{
 		this.email = email;
 	}
 
-	public Instant getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Instant birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 
