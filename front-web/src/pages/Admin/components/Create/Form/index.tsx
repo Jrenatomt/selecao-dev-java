@@ -27,7 +27,7 @@ const Form = () => {
             history.push('/admin/persons')
         })
         .catch(() => {
-            toast.error('erro ao cadastrar')  
+            toast.error('erro ao cadastrar, tente novamente')  
         })
     }
 

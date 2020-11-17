@@ -11,9 +11,6 @@ const SideBar = () => (
         <li>
         <NavLink to="/admin/cadastrar"  className="admin-nav-item" >Cadastrar Pessoas</NavLink>
         </li>
-        <li>
-        <NavLink to="/admin/:personsId"  className="admin-nav-item" >Editar Pessoas</NavLink>
-        </li>
     </ul>
 </nav>
 );

@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Create from './components/Create';
 import SideBar from './components/SideBar';
+import Person from './Person';
 import './styles.scss'
 
 
@@ -16,14 +17,8 @@ const Admin = () => (
               </Route>
 
               <Route path="/admin/persons">
-                 <h1>persons</h1>
+                 <Person />
               </Route>
-
-              <Route path="/admin/:personsId">
-                 <h1>Editar</h1>
-              </Route>
-
-
           </Switch>
         </div>
     </div>
