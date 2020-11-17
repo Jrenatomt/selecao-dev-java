@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Person } from '../../../../core/utils/person'
 import './styles.scss'
 
@@ -22,13 +23,14 @@ const Card = ({person}: Props) => {
              </div>
 
              <div className="col-3 btn-editar">
-                <button className="btn btn-outline-secondary btn-admin border-radios-10">
+                <Link to={`/admin/persons/${person.id}`} type="button" 
+                        className="btn btn-outline-secondary btn-admin border-radios-10">
                         EDITAR
-                </button>
+                </Link>
              </div>
 
              <div className="col-3 btn-excluir ">
-                 <button
+                 <button type="button"
                         className="btn btn-outline-danger btn-admin border-radios-10">
                         EXCLUIR
                 </button>

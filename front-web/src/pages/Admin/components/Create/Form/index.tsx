@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { MakePrivateRequest } from '../../../../../core/utils/request';
 import BaseForm from '../../../BaseForm';
@@ -16,14 +16,40 @@ type FormState = {
     cpf: string;
 }
 
+type paramsType = {
+    personId: string;
+}
+
 const Form = () => {
-    const { register, handleSubmit, errors } = useForm<FormState>();
+    const { register, handleSubmit, errors, setValue } = useForm<FormState>();
     const history = useHistory();
+    const { personId } = useParams<paramsType>();
+    const isEditing = personId;
+    const formTitle = isEditing ? 'EDITAR PESSOA' : "CADASTRAR UMA PESSOA";
+
+    useEffect(() => {
+        if (isEditing) {
+            MakePrivateRequest({ url: `/persons/${personId}` })
+            .then(response => {
+              setValue('name', response.data.name);
+              setValue('gender', response.data.gender);
+              setValue('email', response.data.email);
+              setValue('birthDate', response.data.birthDate);
+              setValue('city', response.data.city);
+              setValue('coutry', response.data.coutry);
+              setValue('cpf', response.data.cpf);
+            })
+        }
+     }, [personId,isEditing,setValue]);
 
     const onSubmit = (data: FormState) => {
-        MakePrivateRequest({ url: '/persons', method: 'POST', data })
+        MakePrivateRequest({ 
+            url: isEditing ? `/persons/${personId}` : '/persons' , 
+            method: isEditing ? 'PUT' : 'POST', 
+            data: data
+        })
         .then(() => {
-            toast.info('pessoa cadastrada com sucesso')
+            toast.info('pessoa salva com sucesso')
             history.push('/admin/persons')
         })
         .catch(() => {
@@ -33,7 +59,7 @@ const Form = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <BaseForm title="cadastrar uma Passoa">
+            <BaseForm title={formTitle}>
                 <div className="row">
                     <div className="col-8">
                         <div className="mb-4 mt-4">
@@ -51,12 +77,13 @@ const Form = () => {
                         </div>
 
                         <div className="mb-4">
-                            <select name="gender"
+                            <input
+                                name="gender"
                                 ref={register}
-                                className="form-control input-base" >
-                                <option value="Feminino">Feminino</option>
-                                <option value="Masculino">Masculino</option>
-                            </select>
+                                type="text"
+                                className="form-control input-base"
+                                placeholder="Sexo"
+                            />
                         </div>
 
                         <div className="mb-4">

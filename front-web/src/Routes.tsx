@@ -14,7 +14,7 @@ const Routes = () => (
           <Route path="/" exact>
             <Login />
           </Route>
-          <Redirect from="/admin" to="/admin/create" exact/>
+          <Redirect from="/admin" to="/admin/cadastrar" exact/>
           <PrivateRoute path="/admin">
             <Admin />
           </PrivateRoute>

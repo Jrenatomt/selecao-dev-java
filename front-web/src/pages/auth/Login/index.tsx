@@ -21,7 +21,7 @@ const Login = () => {
         .then(response => {
             setHasError(false);
             saveSessionData(response.data);
-            history.push('/admin/cadastrar');
+            history.push('/admin/persons');
         })
         .catch( () => {
             setHasError(true);
