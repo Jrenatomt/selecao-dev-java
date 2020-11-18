@@ -16,7 +16,7 @@ type LoginData = {
     password: string;
 }
 
-const BASE_URL= 'https://soft-person-api.herokuapp.com'
+const BASE_URL= 'http://localhost:8080'
 
 axios.interceptors.response.use(function (response) {
     return response;
