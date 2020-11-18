@@ -1,13 +1,28 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory} from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { Person } from '../../../../core/utils/person'
+import { MakePrivateRequest } from '../../../../core/utils/request'
 import './styles.scss'
-
 
 type Props = {
     person: Person;
 }
-const Card = ({person}: Props) => {  
+
+const Card = ({person}: Props) => { 
+    
+    const history = useHistory();
+    
+    const deletePerson = () => {
+        MakePrivateRequest({ url:`/persons/${person.id}`, method: 'DELETE'})
+        .then(() => {
+            toast.info('pessoa deletada com sucesso')
+            history.push('/admin/cadastrar')
+        })
+        .catch(() => {
+            toast.error('erro ao deletar, tente novamente')  
+        })
+    }
 
     return(
        <div className="card-base person-card-admin">
@@ -31,6 +46,7 @@ const Card = ({person}: Props) => {
 
              <div className="col-3 btn-excluir ">
                  <button type="button"
+                        onClick={deletePerson}
                         className="btn btn-outline-danger btn-admin border-radios-10">
                         EXCLUIR
                 </button>

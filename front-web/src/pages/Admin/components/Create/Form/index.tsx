@@ -49,7 +49,7 @@ const Form = () => {
             data: data
         })
         .then(() => {
-            toast.info('pessoa salva com sucesso')
+            toast.info('dados salvo com sucesso')
             history.push('/admin/persons')
         })
         .catch(() => {

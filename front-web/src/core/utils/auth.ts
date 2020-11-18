@@ -1,4 +1,5 @@
 import jwtDecode from 'jwt-decode'
+import history from './history'
 export const CLIENT_ID = 'softperson';
 export const CLIENT_SECRET = 'softperson123';
 
@@ -51,4 +52,9 @@ export const isAuthenticated = () => {
     const sessionData = getSessionData();
 
     return sessionData.access_token && isTokenValid();
+}
+
+export const logout = () => {
+    localStorage.removeItem('authData');
+    history.replace('/admin')
 }
