@@ -5,12 +5,13 @@ import './styles.scss'
 const SideBar = () => (
     <nav className="admin-nav-container">
     <ul>
+    <li>
+        <NavLink to="/admin/cadastrar"  className="admin-nav-item" >Cadastrar Pessoas</NavLink>
+        </li>
         <li>
           <NavLink to="/admin/persons" className="admin-nav-item" >Listar Pessoas</NavLink>
         </li>
-        <li>
-        <NavLink to="/admin/cadastrar"  className="admin-nav-item" >Cadastrar Pessoas</NavLink>
-        </li>
+
     </ul>
 </nav>
 );

@@ -11,7 +11,7 @@ const Admin = () => (
         <SideBar />
         <div className="admin-content">
           <Switch>
-             <Route path="/admin/cadastrar" exact>
+             <Route path="/admin/cadastrar">
                  <Create />
               </Route>
               <Route path="/admin/persons/:personId" exact>

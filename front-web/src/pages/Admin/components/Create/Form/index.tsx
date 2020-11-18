@@ -52,11 +52,14 @@ const Form = () => {
             toast.info('dados salvo com sucesso')
             history.push('/admin/persons')
         })
-        .catch(() => {
-            toast.error('erro ao cadastrar, tente novamente')  
+        .catch((error) => {
+            if (error.response.status === 422){
+                toast.error('email ou cpf já Cadastrados')  
+            }   
+            toast.error('erro ao cadastrar, tente novamente')        
         })
     }
-
+       
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <BaseForm title={formTitle}>
