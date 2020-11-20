@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import Search from '../Search';
 import Create from './components/Create';
 import SideBar from './components/SideBar';
 import Person from './Person';
@@ -11,7 +12,7 @@ const Admin = () => (
         <SideBar />
         <div className="admin-content">
           <Switch>
-             <Route path="/admin/cadastrar">
+             <Route path="/admin/cadastrar" exact>
                  <Create />
               </Route>
               <Route path="/admin/persons/:personId" exact>
@@ -19,6 +20,9 @@ const Admin = () => (
               </Route>
               <Route path="/admin/persons" exact>
                  <Person />
+              </Route>
+              <Route path="/admin/search" exact>
+                 <Search />
               </Route>
           </Switch>
         </div>

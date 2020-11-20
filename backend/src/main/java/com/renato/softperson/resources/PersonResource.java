@@ -28,15 +28,23 @@ import com.renato.softperson.services.PersonService;
 @RestController
 @RequestMapping(value = "/persons")
 public class PersonResource {
-	
+
 	@Autowired
 	private PersonService service;
-	
+		
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<PersonDTO> findPerson(@PathVariable Long id) {
 		PersonDTO dto = service.find(id);
 		return ResponseEntity.ok().body(dto);
 	}
+	
+	@GetMapping(value = "/name/{name}")
+	public ResponseEntity<PersonDTO> searchPerson(@PathVariable String name){
+		PersonDTO dto = service.search(name);
+		return ResponseEntity.ok().body(dto);
+	}
+	
+	
 	
 	@GetMapping
 	public ResponseEntity<Page<PersonDTO>> findallPaged(

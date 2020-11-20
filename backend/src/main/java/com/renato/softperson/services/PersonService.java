@@ -32,6 +32,13 @@ public class PersonService {
 	}
 	
 	@Transactional(readOnly = true)
+	public PersonDTO search(String name) {
+		Optional<Person> person = repository.findByNameIgnoreCase(name);
+		Person entity = person.orElseThrow( () -> new ResourceNotFoundException("Resource not found"));
+		return new PersonDTO(entity);
+	}
+	
+	@Transactional(readOnly = true)
 	public Page<PersonDTO> findAllPersons(PageRequest pageRequest){
 		Page<Person> person = repository.findAll(pageRequest);
 		return person.map( x -> new PersonDTO(x));
